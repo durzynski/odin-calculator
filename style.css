@@ -1,5 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
+    font-family: Roboto;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
     background-color: lightgray;
+}
+
+.main-container {
+    background-color: darkgray;
+    width: 300px;
+    height: 450px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.calc-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0 16px;
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    background-color: transparent;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 8px;
+    background-color: lightgray;
+    border-radius: 8px;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    gap: 4px;
+}
+
+.row {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.row button {
+    border-radius: 4px;
+    border: none;
+    flex: 1;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+#zero {
+    flex: 2 0 4px;
+}
+
+.clear,
+.plus-minus,
+.percent {
+    background-color: lightskyblue;
+}
+
+.operator,
+.equals {
+    background-color: orange;
+    text-align: center;
+}
+
+.operand,
+.dot {
+    background-color: lightgreen;
 }
