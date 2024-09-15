@@ -39,7 +39,7 @@ let lastNumber = ""
 let currentNumber = ""
 let operator = ""
 
-let resultDisplay = document.querySelector(".result")
+let resultText = document.querySelector(".result-text")
 let operandButtons = document.querySelectorAll(".operand")
 let operatorButtons = document.querySelectorAll(".operator")
 let dotButton = document.querySelector(".dot")
@@ -57,13 +57,13 @@ operandButtons.forEach(button => {
             }
         });
 
-        if (currentNumber[0] == "" || currentNumber[0] == "0") {
+        if (currentNumber[0] == "" || currentNumber[0] == "0" && currentNumber.length == 1) {
             currentNumber = e.target.value
         } else {
             currentNumber += e.target.value
         }
- 
-        resultDisplay.textContent = currentNumber
+
+        updateResult(currentNumber)
     })
 });
 
@@ -80,7 +80,7 @@ operatorButtons.forEach(button => {
         if (lastNumber != "" && operator != "") {
             console.log(operate(lastNumber, currentNumber, operator))
             lastNumber = operate(lastNumber, currentNumber, operator)
-            resultDisplay.textContent = parseFloat(lastNumber.toFixed(4))
+            updateResult(parseFloat(lastNumber.toFixed(4)))
             currentNumber = ""
         } else {
             lastNumber = currentNumber
@@ -96,7 +96,7 @@ equalsButton.addEventListener("click", () => {
     if (operator != "") {
         lastNumber = operate(lastNumber, currentNumber, operator)
         currentNumber = lastNumber
-        resultDisplay.textContent = parseFloat(lastNumber.toFixed(4))
+        updateResult(parseFloat(lastNumber.toFixed(4)))
         operator = ""
     }
 
@@ -106,20 +106,20 @@ equalsButton.addEventListener("click", () => {
 })
 
 dotButton.addEventListener("click", () => {
-    if (!currentNumber.toString().includes(".")) {
+    if (!currentNumber.toString().includes(".") && currentNumber != "") {
         currentNumber += "."
-        resultDisplay.textContent = currentNumber
+        updateResult(currentNumber)
     }
 })
 
 signButton.addEventListener("click", () => {
     currentNumber *= -1
-    resultDisplay.textContent = parseFloat(currentNumber.toFixed(4))
+    updateResult(parseFloat(currentNumber.toFixed(4)))
 })
 
 percentButton.addEventListener("click", () => {
     currentNumber /= 100
-    resultDisplay.textContent = parseFloat(currentNumber.toFixed(4))
+    updateResult(parseFloat(currentNumber.toFixed(4)))
 })
 
 
@@ -133,5 +133,22 @@ clearButton.addEventListener("click", () => {
         button.style.opacity = "1"
     });
 
-    resultDisplay.textContent = "0"
+    updateResult("0")
 })
+
+function updateResult(result) {
+
+    resultText.textContent = result
+
+    let container = document.querySelector(".result-container")
+
+    let fontSize = 48
+    resultText.style.fontSize = fontSize + "px"
+
+
+    while (resultText.scrollWidth > container.clientWidth && fontSize > 12) {
+        fontSize--
+        resultText.style.fontSize = fontSize + "px"
+    }
+}
+
